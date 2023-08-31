@@ -9,6 +9,9 @@
     <title>Home</title>
 </head>
 <body class="p-3 mb-2 bg-light text-black">
+
+
+
 <div class="container">
     <div id="logoutDiv">
         <form th:action="@{/logout}" method="POST">
@@ -66,7 +69,7 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">
-                <button style="margin: 0.25em;" type="button" class="btn btn-info float-right"
+                <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" id="btn-view-add-note"
                         onclick="showNoteModal()">
                     + Add a New Note
                 </button>
@@ -83,14 +86,35 @@
                         <tbody>
                         <tr th:each="e : ${notes}">
                             <td>
-                                <button type="button" class="btn btn-success" th:attr="onclick=|showNoteModal('${e.noteId}')|" >Edit</button>
-                                <a class="btn btn-danger" th:attr="onclick=|deleteNote('${e.noteId}')|">Delete</a>
+                                <button id="btn-edit-note" type="button" class="btn btn-success" th:attr="onclick=|showNoteModal('${e.noteId}')|" >Edit</button>
+                                <a class="btn btn-danger"  th:attr="onclick=|test('${e.noteId}')|" id="btn-delete-note" data-toggle="modal" data-target="#modal-delete">Delete</a>
                             </td>
-                            <th th:text="${e.noteTitle}" scope="row">Example Note Title</th>
-                            <td th:text="${e.noteDescription}">Example Note Description</td>
+                            <th id="text-title-note" th:text="${e.noteTitle}" scope="row">Example Note Title</th>
+                            <td id="text-description-note" th:text="${e.noteDescription}">Example Note Description</td>
                         </tr>
                         </tbody>
                     </table>
+                </div>
+
+<!--                modal delete-->
+                <div class="modal" id="modal-delete" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Delete</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete this note</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button id="btn-confirm-delete" type="button" class="btn btn-danger" onclick="deleteNote()" >delete</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel"
@@ -121,7 +145,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" onclick="$('#noteSubmit').click();">Save
+                                <button id="btn-save-note" type="button" class="btn btn-primary" onclick="$('#noteSubmit').click();">Save
                                     changes
                                 </button>
                             </div>
@@ -211,6 +235,7 @@
 <!--For opening the note modal-->
 <script type="text/javascript">
             // For opening the note modal
+
             function showNoteModal(noteId, noteTitle, noteDescription) {
                 var form = document.getElementById('noteForm'); // Lấy tham chiếu đến form
 
@@ -263,28 +288,27 @@
             }
 
 
-            function deleteNote(noteId) {
+            function deleteNote() {
+            console.log(noteId);
                 var apiUrl = "/note/delete/" + noteId;
                 console.log(apiUrl);
-                if (confirm("Are you sure you want to delete this note?")) {
-                    // Gọi API bằng JavaScript (có thể sử dụng Fetch API hoặc XMLHttpRequest)
-                    fetch(apiUrl, {
+               fetch(apiUrl, {
                         method: 'DELETE',
                     })
                     .then(response => {
                         if (response.status === 200) {
-                            alert('Note deleted successfully.');
                             window.location = '/home?active=true';
-                            // Thực hiện các tác vụ khác sau khi xóa note thành công
                         } else {
                             alert('Failed to delete note.');
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert('An error occurred while deleting the note.');
                     });
-                }
+            }
+            let noteId;
+            function test(id){
+            noteId = id;
             }
 
 </script>
