@@ -31,7 +31,6 @@ public class UserController {
     public String save(RedirectAttributes redirectAttributes, Model model, @ModelAttribute("user") Users users) throws DuplicateMemberException {
         try {
             String result1 = "You successfully signed up!";
-
             userService.save(users);
             model.addAttribute("result", "Successfully!");
             redirectAttributes.addFlashAttribute("result1", result1);

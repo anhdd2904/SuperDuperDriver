@@ -6,8 +6,6 @@ CREATE TABLE IF NOT EXISTS USERS (
   firstname VARCHAR(20),
   lastname VARCHAR(20)
 );
-insert into USERS(username, salt, password, firstname, lastname)
-values ('1', '1', '1', '1', '1');
 CREATE TABLE IF NOT EXISTS NOTES (
     noteid INT PRIMARY KEY auto_increment,
     notetitle VARCHAR(20),

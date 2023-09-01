@@ -304,7 +304,7 @@ class SuperduperdriverApplicationTests {
     @Test()
     public void testAddNote() {
 
-        addNote("anhdd","anhdd","Add","123456");
+        addNote("anhdd", "anhdd", "Add", "123456");
         WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("text-title-note")));
@@ -317,8 +317,8 @@ class SuperduperdriverApplicationTests {
      * Viết bài kiểm tra chỉnh sửa ghi chú hiện có và xác minh rằng các thay đổi được hiển thị.
      */
     @Test
-    public void testUpdateNote(){
-        addNote("anhdd","anhdd","Update","123456");
+    public void testUpdateNote() {
+        addNote("anhdd", "anhdd", "Update", "123456");
         WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btn-edit-note")));
@@ -358,8 +358,8 @@ class SuperduperdriverApplicationTests {
      * Viết bài kiểm tra xóa ghi chú và xác minh rằng ghi chú đó không còn hiển thị nữa.
      */
     @Test
-    public void testDeleteNote(){
-        addNote("anhdd","anhdd","Delete","123456");
+    public void testDeleteNote() {
+        addNote("anhdd", "anhdd", "Delete", "123456");
         WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btn-delete-note")));
@@ -374,9 +374,15 @@ class SuperduperdriverApplicationTests {
         WebElement buttonShowAddNote = driver.findElement(By.id("nav-notes-tab"));
         buttonShowAddNote.click();
 
+        Boolean testSuccess = true;
 
-//        Assertions.assertFalse((BooleanSupplier) driver.findElement(By.id("text-title-note")));
-//        Assertions.assertFalse((BooleanSupplier) driver.findElement(By.id("text-description-note")));
+        try {
+            Assertions.assertFalse(driver.findElement(By.id("text-title-note")).getText().contains("This is title"));
+            Assertions.assertFalse(driver.findElement(By.id("text-description-note")).getText().contains("This is description"));
+        }catch (org.openqa.selenium.NoSuchElementException e){
+            Assertions.assertTrue(testSuccess==true);
+        }
+
     }
 
 }

@@ -2,11 +2,11 @@ package com.udacity.superduperdriver.model;
 
 public class Credentials {
     private Long credentialId;
-    private Long userId;
     private String url;
     private String username;
-    private String password;
     private String key;
+    private String password;
+    private Long userId;
 
     public Credentials(Long credentialId, Long userId, String url, String username, String password, String key) {
         this.credentialId = credentialId;
