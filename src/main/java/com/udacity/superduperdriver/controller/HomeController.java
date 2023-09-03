@@ -1,6 +1,7 @@
 package com.udacity.superduperdriver.controller;
 
 import com.udacity.superduperdriver.security.AuInfoUser;
+import com.udacity.superduperdriver.service.CredentialsService;
 import com.udacity.superduperdriver.service.FileService;
 import com.udacity.superduperdriver.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HomeController {
     private FileService fileService;
     private NoteService noteService;
+    private CredentialsService credentialsService;
     private AuInfoUser auInfoUser;
 
     @Autowired
-    public HomeController(FileService fileService, NoteService noteService, AuInfoUser auInfoUser) {
+    public HomeController(FileService fileService, NoteService noteService, AuInfoUser auInfoUser, CredentialsService credentialsService) {
         this.fileService = fileService;
         this.noteService = noteService;
+        this.credentialsService = credentialsService;
     }
 
     @GetMapping("/home")
@@ -27,6 +30,7 @@ public class HomeController {
         try {
             model.addAttribute("files", fileService.findByIdUser());
             model.addAttribute("notes", noteService.findByUser());
+            model.addAttribute("credentialsList" , credentialsService.findAllByUser());
             return "home";
         } catch (NullPointerException e) {
             return "login";

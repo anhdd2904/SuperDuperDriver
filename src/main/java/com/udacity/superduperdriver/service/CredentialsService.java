@@ -1,6 +1,8 @@
 package com.udacity.superduperdriver.service;
 
+import com.udacity.superduperdriver.dto.CredentialsDTO;
 import com.udacity.superduperdriver.model.Credentials;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 
 import javax.crypto.BadPaddingException;
@@ -13,11 +15,11 @@ import java.util.List;
 public interface CredentialsService {
 
     int save(Credentials credentials) throws DuplicateMemberException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException;
-    int delete(Long id);
-    int update(Credentials credentials);
+    int delete(Long id) throws NotFoundException;
+    int update(Credentials credentials) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException;
 
-    List<Credentials> findAllByUser();
+    List<CredentialsDTO> findAllByUser();
 
-    Credentials findById(Long id);
+    CredentialsDTO findById(Long id);
 
 }

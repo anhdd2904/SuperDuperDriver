@@ -1,10 +1,8 @@
 package com.udacity.superduperdriver.mapper;
 
+import com.udacity.superduperdriver.dto.CredentialsDTO;
 import com.udacity.superduperdriver.model.Credentials;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -19,10 +17,16 @@ public interface CredentialsMapper {
             "WHERE username = #{username} and url = #{url}")
     int existsByUsernameAndUrl(String username, String url);
 
-
+    @Delete("DELETE FROM CREDENTIALS WHERE credentialid = #{credentialId}")
     int delete(Long id);
+
+    @Update("UPDATE CREDENTIALS SET url = #{url}, username = #{username}, password = #{password},credentialkey = #{key}  WHERE credentialid = #{credentialId}")
     int update(Credentials credentials);
-    List<Credentials> findAllByUser(Long idUser);
+
+    @Select("SELECT * FROM CREDENTIALS WHERE userid = #{userId}")
+    List<CredentialsDTO> findAllByUser(Long idUser);
+
+    @Select("SELECT * FROM CREDENTIALS WHERE credentialid = #{credentialId}")
     Credentials findById(Long id);
 
 
