@@ -50,14 +50,14 @@ public class CredentialsController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteCredential(Model model, @PathVariable("id") Long id) throws NotFoundException {
+    public String deleteCredential(Model model, @PathVariable("id") Long id) throws NotFoundException {
         try {
             credentialsService.delete(id);
             model.addAttribute("success", "Credential successfully saved.");
-            return ResponseEntity.ok("result");
+            return "result";
         }catch (Exception exception){
             model.addAttribute("error", "Delete Credential Error");
-            return ResponseEntity.ok("error");
+            return "result";
         }
     }
 }

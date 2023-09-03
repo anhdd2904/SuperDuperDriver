@@ -184,9 +184,7 @@
                                         th:attr="onclick=|showCredentialModal('${e.credentialId}', '${e.username}','${e.url}','${e.decryptedPassword}')|">
                                     Edit
                                 </button>
-                                <a class="btn btn-danger"
-                                   th:attr="onclick=|constructorVariable('','${e.credentialId}')|"
-                                   data-toggle="modal" data-target="#modal-delete-credential">Delete</a>
+                                <a class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-credential">Delete</a>
 
 
                             </td>
@@ -212,8 +210,8 @@
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                 Close
                                             </button>
-                                            <form th:action="@{'/credential/delete/' + ${credential.id}}" method="post">
-                                                <input type="hidden" name="_method" value="delete"/>
+                                            <form th:if="${e.credentialId != null}" th:action="@{'/credential/delete/' + ${e.credentialId}}" method="post">
+                                                <input type="hidden" name="_method" value="DELETE"/>
                                                 <button type="submit" class="btn btn-danger"
                                                         >delete
                                                 </button>
@@ -356,32 +354,6 @@
                     });
             }
 
-
-//Delete Credential
-
-<!--            function deleteCredentialModal() {-->
-<!--            console.log(credentialId);-->
-<!--                var apiUrl = "/credential/delete/" + credentialId;-->
-<!--                console.log(apiUrl);-->
-<!--               fetch(apiUrl, {-->
-<!--                        method: 'DELETE',-->
-<!--                    })-->
-<!--                    .then(body => {-->
-<!--						return body.text();-->
-<!--						})-->
-<!--&lt;!&ndash;                    .then(response => {&ndash;&gt;-->
-<!--&lt;!&ndash;                        if (response.status === 200) {&ndash;&gt;-->
-<!--&lt;!&ndash;                            window.location = '/home?active=true'&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;                                return response.text();&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                        } else {&ndash;&gt;-->
-<!--&lt;!&ndash;                            alert('Failed to delete note.');&ndash;&gt;-->
-<!--&lt;!&ndash;                        }&ndash;&gt;-->
-<!--&lt;!&ndash;                    })&ndash;&gt;-->
-<!--                    .catch(error => {-->
-<!--                        console.error('Error:', error);-->
-<!--                    });-->
-<!--            }-->
-
             let noteId;
             let credentialId;
             function constructorVariable (id,idCredential ){
@@ -389,10 +361,6 @@
             noteId = id;
             credentialId = idCredential;
             }
-
-
-
-
 
 </script>
 </body>
