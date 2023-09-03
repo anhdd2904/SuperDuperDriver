@@ -50,7 +50,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public List<Notes> findByUser() {
         Long idUser = auInfoUser.getInfoUser().getUserid();
-        List<Notes> notesList = noteMapper.findByUser(idUser);
+        List<Notes> notesList = noteMapper.findByIdUser(idUser);
         return notesList;
     }
 }

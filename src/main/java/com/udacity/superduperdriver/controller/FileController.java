@@ -31,7 +31,7 @@ public class FileController {
             files.setFileSize(String.valueOf(file.getSize()));
             files.setFileData(file.getBytes());
             fileService.save(files);
-            model.addAttribute("success", "File were successfully uploaded.");
+            model.addAttribute("success", "Upload File successfully");
         }
         return "result";
     }
@@ -49,8 +49,14 @@ public class FileController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteFileById(@PathVariable Long id) {
-        fileService.deleteByIdFile(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public String deleteFileById(@PathVariable Long id,Model model) {
+        try {
+            fileService.deleteByIdFile(id);
+            model.addAttribute("success", "Delete file successfully");
+            return "result";
+        }catch (Exception exception){
+            model.addAttribute("error", "Delete file Error");
+            return "result";
+        }
     }
 }

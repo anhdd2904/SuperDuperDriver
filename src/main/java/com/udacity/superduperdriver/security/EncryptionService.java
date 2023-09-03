@@ -11,15 +11,6 @@ import java.util.Base64;
 @Service
 public class EncryptionService {
 
-//    public void encryptionPassword(String password){
-//        SecureRandom random = new SecureRandom();
-//        byte[] key = new byte[16];
-//        random.nextBytes(key);
-//        String encodedKey = Base64.getEncoder().encodeToString(key);
-//        String encryptedPassword = encryptionService.encryptValue(password, encodedKey);
-//        String decryptedPassword = encryptionService.decryptValue(encryptedPassword, encodedKey);
-//    }
-
     public String encryptValue(String password, String key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         SecretKey secretKey = new SecretKeySpec(key.getBytes(), "AES");
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");

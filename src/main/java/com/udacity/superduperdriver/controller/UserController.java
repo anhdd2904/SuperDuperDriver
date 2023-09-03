@@ -32,11 +32,11 @@ public class UserController {
         try {
             String result1 = "You successfully signed up!";
             userService.save(users);
-            model.addAttribute("result", "Successfully!");
+            model.addAttribute("result", "Sign Up successfully");
             redirectAttributes.addFlashAttribute("result1", result1);
             return "redirect:/login";
         } catch (DuplicateMemberException exception) {
-            model.addAttribute("error", "Username already exists!");
+            model.addAttribute("error", "Username already exists");
             return "signup";
         }
     }

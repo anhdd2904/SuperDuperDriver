@@ -16,7 +16,7 @@ public interface UserMapper {
     @Select("SELECT COUNT(*) \n" +
             "FROM USERS \n" +
             "WHERE username = #{username} ")
-    int existsByUsername(String username);
+    int checkExistsByUsername(String username);
 
     @Select("SELECT * \n" +
             "FROM USERS \n" +

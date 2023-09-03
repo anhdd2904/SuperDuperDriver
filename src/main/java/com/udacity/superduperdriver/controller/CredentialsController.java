@@ -34,10 +34,10 @@ public class CredentialsController {
         try {
             credentialsService.save(credentials);
             redirectAttributes.addFlashAttribute("result1", "You successfully signed up!");
-            model.addAttribute("success", "Credential successfully saved.");
+            model.addAttribute("success", "Save credential successfully");
             return "result";
         } catch (DuplicateMemberException exception) {
-            model.addAttribute("error", "Username already exists!");
+            model.addAttribute("error", "Error :(( Username already exists!");
             return "signup";
         }
     }
@@ -45,7 +45,7 @@ public class CredentialsController {
     @PostMapping("/update/{id}")
     public String updateCredential (Model model, @ModelAttribute("credentials")Credentials credentials) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         credentialsService.update(credentials);
-        model.addAttribute("success", "Credential successfully saved.");
+        model.addAttribute("success", "Save credential successfully");
         return "result";
     }
 
@@ -53,7 +53,7 @@ public class CredentialsController {
     public String deleteCredential(Model model, @PathVariable("id") Long id) throws NotFoundException {
         try {
             credentialsService.delete(id);
-            model.addAttribute("success", "Credential successfully saved.");
+            model.addAttribute("success", "Delete credential successfully saved.");
             return "result";
         }catch (Exception exception){
             model.addAttribute("error", "Delete Credential Error");

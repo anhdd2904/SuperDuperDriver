@@ -24,20 +24,26 @@ public class NoteController {
     @PostMapping("/save")
     public String addNotes(Model model, @ModelAttribute("notes") Notes notes) {
         noteService.save(notes);
-        model.addAttribute("success", "Note successfully saved.");
+        model.addAttribute("success", "Save Note successfully");
         return "result";
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteNotes(@PathVariable Long id) {
-        noteService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public String deleteNotes(@PathVariable Long id, Model model) {
+        try {
+            noteService.deleteById(id);
+            model.addAttribute("success", "Delete note successfully");
+            return "result";
+        }catch (Exception exception){
+            model.addAttribute("error", "Delete Note Error");
+            return "result";
+        }
     }
 
     @PostMapping("/update/{id}")
     public String updateNotes(Model model, @ModelAttribute("notes") Notes notes){
         noteService.update(notes);
-        model.addAttribute("success", "Note successfully saved.");
+        model.addAttribute("success", "Update Note successfully");
         return "result";
     }
 }

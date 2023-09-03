@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int save(Users users) throws DuplicateMemberException {
-        if (userMapper.existsByUsername(users.getUsername()) > 0){
+        if (userMapper.checkExistsByUsername(users.getUsername()) > 0){
             throw new DuplicateMemberException("This username already exists");
         }
         byte[] salt = new byte[20];

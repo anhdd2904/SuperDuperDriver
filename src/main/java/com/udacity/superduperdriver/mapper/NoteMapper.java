@@ -16,7 +16,7 @@ public interface NoteMapper {
     int deleteById(Long id);
 
     @Select("SELECT * FROM NOTES WHERE userid = #{userId}")
-    List<Notes> findByUser(Long userId);
+    List<Notes> findByIdUser(Long userId);
 
     @Update("UPDATE NOTES SET notetitle = #{noteTitle}, notedescription = #{noteDescription}, userid = #{userId} WHERE noteid = #{noteId}")
     int update (Notes notes);

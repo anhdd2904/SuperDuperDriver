@@ -40,7 +40,6 @@ public class FileServiceImpl implements FileService {
     @Override
     public List<Files> findByIdUser() {
         Long idUser = auInfoUser.getInfoUser().getUserid();
-        //Thêm throw nếu idUser null
         List<Files> filesList = fileMapper.findByIdUser(idUser);
         return filesList;
     }
