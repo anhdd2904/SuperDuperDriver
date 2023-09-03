@@ -26,7 +26,6 @@ class SuperduperdriverApplicationTests {
 
     @BeforeAll
     static void beforeAll() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Techcare\\Downloads\\chromedriver-win64\\chromedriver.exe");
     }
 
     @BeforeEach
